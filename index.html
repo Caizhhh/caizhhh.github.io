@@ -1,18 +1,403 @@
 <!DOCTYPE html>
-<tittle>东莞市远图装饰工程有限公司</tittle>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
+        /* 页眉样式 */
+        .main-header {
+            background-color: #F8F8F8; /* 更灰的浅白色背景 */
+            color: #333; /* 深灰色字体 */
+            padding: 10px 20px; /* 调整内边距 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #CCCCCC; /* 灰色边框 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+                }
+        .nav-bar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            position: relative; /* 为了定位底部蓝条 */
+        }
+
+        .nav-bar ul li {
+            margin-left: 20px;
+        }
+
+        .nav-bar ul li a {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            transition: background-color 0.3s, transform 0.1s;
+            color:#333;
+            border-radius: 5px;
+        }
+        /* 导航栏鼠标悬停效果 */
+        .nav-bar ul li a:hover {
+            background-color: gray;
+            color:white;
+            border-radius: 5px;
+        }
+
+        /* 导航栏按钮按下效果 */
+        .nav-bar ul li a:active {
+            transform: translateY(2px);
+        }
+
+        .content-wrapper {
+            padding-top: 75px; /* 留出页眉空间 */
+        }
+
+        /* 公司logo样式 */
+        .company-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* 滚动图片流样式 */
+        .image-slider {
+            width: 100%;
+            height: 78vh;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+        .content-wrapper {
+            padding-top: 0; /* 去掉页眉和图片滚动流之间的空隙 */
+        }
+        .image-slides {
+            display: flex;
+            width: 800%; /* 8张图片，每张占100% */
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .image-slides img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 控制图片按钮 */
+        .slider-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .slider-controls button {
+            margin: 0 5px;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        /* 控制图片按钮悬停效果 */
+        .slider-controls button:hover {
+            background-color: gray;
+        }
+
+        /* 当前选中的数字按钮 */
+        .slider-controls button.active {
+            background-color: #0078D4;
+            color: white;
+        }
+
+        /* 控制图片按钮按下效果 */
+        .slider-controls button:active {
+            transform: scale(0.9);
+        }
+
+        /* 新闻中心和联系我们框 */
+        .info-boxes {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            width: 20%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.1);
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            position: relative;
+            margin-top: 0;
+            padding-left: 15px; /* 给蓝条留出空间 */
+        }
+
+        .info-box h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px; /* 蓝条的宽度 */
+            height: 100%;
+            background-color: #0078D4; /*  蓝色 */
+}
+
+
+        .news-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .news-item a {
+            text-decoration: none;
+            color: black;
+            flex-grow: 1;
+        }
+
+        .news-date {
+            color: gray;
+            text-align: right;
+        }
+
+        .news-item a:hover {
+            color: blue;
+        }
+
+        /* 主体内容样式 */
+        .main-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .main-content p {
+            margin-bottom: 20px;
+        }
+        .main-content h1 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .main-content h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px; /* 下划线距离标题的距离 */
+            width: 100%;
+            height: 4px; /* 下划线的高度 */
+            background-color: #0078D4; /* Windows 11 蓝色 */
+            border-radius: 2px; /* 圆角 */
+        }
+
+        /* 长方形扁平按钮样式 */
+        .flat-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 40px;
+            background-color: #F5F5DC;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 280px;
+            border: 2px solid #0078D4; /* 蓝色边框 */
+        }
+
+        .flat-button:hover {
+            background-color: #0078D4;
+            color:#F5F5DC
+        }
+
+        .flat-button:active {
+            transform: scale(0.95);
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #F8F8F8; /* 更灰的浅白色背景 */
+            color: #333; /* 深灰色字体 */
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+            text-align: center;
+            border-top: 1px solid #CCCCCC; /* 灰色边框 */
+        }
+        ::-webkit-scrollbar {
+            width: 8px; /* 滚动条宽度 */
+            height: 8px; /* 横向滚动条高度 */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px; /* 圆角 */
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* 圆角 */
+        }
+
+
+    </style>
+</head>
 <body>
-  <h1>测试页 Test Page</h1>
-  <p>当前网站尚未完成搭建，请耐心等待</p>
-  <p>东莞市远图装饰工程有限公司 &copy; 版权所有</p>
-  <p id="userAgent"></p >
+    <!-- 页眉部分 -->
+    <header class="main-header">
+        <div class="company-logo">东莞市远图装饰工程有限公司</div>
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="about.html">关于公司</a></li>
+                <li><a href="ANLI/index.html">案例中心</a></li>
+                <li><a href="contact.html">联系我们  </a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <script>
-    var userAgent = navigator.userAgent;
-    document.getElementById("userAgent").innerHTML = "当前浏览器UserAgent：" + userAgent;
-  </script>
+    <!-- 内容包裹，留出页眉空间 -->
+    <div class="content-wrapper">
+        <!-- 滚动图片流部分 -->
+        <div class="image-slider">
+            <div class="image-slides" id="slides">
+                <img src="image/anli/2.2.png" alt="Image 1">
+                <img src="image/anli/2.3.png" alt="Image 2">
+                <img src="image/anli/3.1.png" alt="Image 3">
+                <img src="image/anli/3.2.png" alt="Image 4">
+                <img src="image/anli/3.3.png" alt="Image 5">
+                <img src="image/anli/5.png" alt="Image 6">
+                <img src="image/anli/4.1.png" alt="Image 7">
+                <img src="image/anli/6.png" alt="Image 8">
+            </div>
 
+            <!-- 控制图片的按钮 -->
+            <div class="slider-controls">
+                <button onclick="showSlide(0)">1</button>
+                <button onclick="showSlide(1)">2</button>
+                <button onclick="showSlide(2)">3</button>
+                <button onclick="showSlide(3)">4</button>
+                <button onclick="showSlide(4)">5</button>
+                <button onclick="showSlide(5)">6</button>
+                <button onclick="showSlide(6)">7</button>
+                <button onclick="showSlide(7)">8</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1>东莞市远图装饰工程有限公司</h1>
+            <p>我们提供优质的产品和服务，期待与您合作</p>
+        </div>
+    </div>
+        <!-- 新闻中心和联系我们部分 -->
+        <div class="info-boxes">
+            <!-- 新闻中心 -->
+            <div class="info-box">
+                <h3>新闻中心</h3>
+                <div class="news-item">
+                    <a href="News/index/2024.1.1.html">2024龙年行大运</a>
+                    <div class="news-date">2024-1-1</div>
+                </div>
+                <div class="news-item">
+                    <a href="News/index/2023.12.31.html">公司年终总结</a>
+                    <div class="news-date">2023-12-31</div>
+                </div>
+                <div class="news-item">
+                    <a href="News/index/2023.11.15.html">新产品发布</a>
+                    <div class="news-date">2023-11-15</div>
+                </div>
+            </div>
+
+            <!-- 长方形扁平按钮 -->
+            <div>
+                <button class="flat-button" onclick="location.href='ANLI/index.html'">案例中心</button>
+                <button class="flat-button" onclick="location.href='about.html'">关于公司</button>
+            </div>
+
+            <!-- 联系我们框 -->
+            <div class="info-box">
+                <h3>联系我们</h3>
+                <div class="contact-item">
+                    <p>电话: 158 1411 8081</p>
+                    <p>邮箱: </p>
+                    <p>地址: </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主题内容部分 -->
+        <div class="main-content">
+            <p>您可以前往案例中心查看更多！</p>
+        </div>
+    </div>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <p>版权所有 © 2024 东莞市远图装饰工程有限公司 | PC版</p>
+    </footer>
+
+    <script>
+        // 当前显示的图片索引
+        let currentSlide = 0;
+        const totalSlides = 8; // 总共8张图片
+        let isManualSlide = false;
+
+        // 自动切换图片
+        let autoSlideInterval = setInterval(nextSlide, 3000);
+
+        function nextSlide() {
+            if (!isManualSlide) {
+                if (currentSlide === totalSlides - 1) {
+                    skipAnimation();
+                    setTimeout(() => showSlide(0), 1);
+                } else {
+                    showSlide(currentSlide + 1);
+                }
+            }
+        }
+
+        // 手动切换图片
+        function showSlide(index) {
+            const slides = document.getElementById('slides');
+            const slideWidth = slides.children[0].clientWidth;
+            slides.style.transition = index === 0 && currentSlide === totalSlides - 1 ? 'none' : 'transform 1s ease-in-out';
+            slides.style.transform = `translateX(${-index * slideWidth}px)`;
+            currentSlide = index;
+            isManualSlide = true;
+
+            // 更新当前按钮状态
+            const buttons = document.querySelectorAll('.slider-controls button');
+            buttons.forEach((button, i) => {
+                button.classList.remove('active');
+                if (i === currentSlide) {
+                    button.classList.add('active');
+                }
+            });
+
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 3000);
+            setTimeout(() => isManualSlide = false, 10000); // 10秒后恢复自动切换
+        }
+
+        function skipAnimation() {
+            const slides = document.getElementById('slides');
+            slides.style.transition = 'none';
+        }
+    </script>
 </body>
-
 </html>
