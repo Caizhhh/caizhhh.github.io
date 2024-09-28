@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 not found 无法访问</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('404.png'); /* 背景图片地址 */
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 10em;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    h1:hover {
+      color: #3498db; /* 蓝色 */
+      transform: scale(1.1);
+    }
+
+    h1:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      filter: blur(20px);
+      z-index: -1;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 20px;
+      font-family: '宋体', sans-serif;
+    }
+
+    .message-box {
+      background: rgba(255, 255, 255, 0.3); /* 半透明白色背景 */
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-family: '微软雅黑', sans-serif;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 1px #000;
+    }
+    .context-menu {
+            display: none;
+            position: fixed;
+            background-color: #f5f5f5; /* 乳白色背景 */
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            z-index: 1000;
+            width: 180px; /* 调宽右键菜单 */
+            transform-origin: top right;
+            color:#000;
+            animation: fadeIn 0.3s ease-in-out; /* 添加淡入动画 */
+            color:#000
+        }
+
+        .context-menu-item {
+            padding: 8px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .context-menu-item::before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background-color: #0056b3; /* Win11 blue color */
+            left: 0;
+            top: 0;
+            opacity: 0;
+            border-radius: 3px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .context-menu-item:hover {
+            background-color: #e0e0e0; /* Slightly darker gray */
+            color: #0078D4; /* Win11 blue color */
+        }
+
+        .context-menu-item:hover::before {
+            opacity: 1;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+  </style>
+  <title>404 Not Found</title>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>东莞市远图装饰工程有限公司</h2>
+    <div class="message-box">
+      <p>开发者可能已经从源代码中移除此页面</p>
+      <p>您可以请检查网络，或者返回<a href="../index.html">首页</a></p>
+    </div>
+    <div class="footer">
+        <span id="time"></span>
+        <span> | </span>
+        <span id="battery"></span>
+      </div>
+  </div>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 更新日期和时间以及电池状态的函数
+    function updateDateTime() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var timeString = hours + ':' + minutes + ':' + seconds;
+
+        document.getElementById('time').innerText = timeString;
+
+        setTimeout(updateDateTime, 1000);
+    }
+
+    function updateBatteryStatus() {
+        navigator.getBattery().then(function(battery) {
+            var batteryLevel = (battery.level * 100).toFixed(0) + '%';
+            document.getElementById('battery').innerText = batteryLevel;
+        });
+
+        // 每隔一分钟更新一次
+        setTimeout(updateBatteryStatus, 6000);
+    }
+
+    updateDateTime();
+    updateBatteryStatus();
+
+    // 右键菜单相关的函数和事件监听器
+    const contextMenu = document.createElement('div');
+    contextMenu.className = 'context-menu';
+    document.body.appendChild(contextMenu);
+
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+
+        const x = event.clientX;
+        const y = event.clientY;
+
+        contextMenu.innerHTML = `
+            <div class="context-menu-item" onclick="goBack()">上一步</div>
+            <div class="context-menu-item" onclick="refresh()">刷新</div>
+            <div class="context-menu-item" onclick="goToMainPage()">返回主页</div>
+            <div class="context-menu-item" onclick="openAboutPage()">关于</div>
+        `;
+
+        contextMenu.style.display = 'block';
+        contextMenu.style.left = x + 'px';
+        contextMenu.style.top = y + 'px';
+        contextMenu.classList.add('fade-in'); // 添加淡入类
+    });
+
+    document.addEventListener('click', function() {
+        contextMenu.classList.remove('fade-in'); // 移除淡入类
+        contextMenu.style.display = 'none';
+    });
+});
+
+function goBack() {
+    window.history.back();
+}
+
+function goForward() {
+    window.history.forward();
+}
+
+function refresh() {
+    location.reload();
+}
+
+function goToMainPage() {
+    window.location.href = 'index.html';
+}
+
+function openAboutPage() {
+    window.location.href = 'About.html';
+}
+
+  </script>
+</body>
+</html>
