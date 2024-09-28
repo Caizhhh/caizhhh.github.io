@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 移动端</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5F5;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* 页眉样式 */
+        .header {
+            background-color: #FFF;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px; /* 移动端适应字体大小 */
+            color: #333;
+        }
+
+        .header .subtitle {
+            margin-top: 5px;
+            font-size: 14px; /* 移动端适应字体大小 */
+            color: #666;
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            fill: #0078D4; 
+        }
+
+        .back-button:hover svg {
+            fill: #005A9E; /* 鼠标悬停效果 */
+        }
+
+        /* 图片部分 */
+        .contact-image {
+            width: 100%;
+            height: 250px; /* 调整为适合移动端的高度 */
+            background-image: url('contact.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 联系我们信息框 */
+        .contact-info {
+            background-color: #FFF;
+            padding: 15px;
+            margin: -40px auto 30px;
+            width: 90%;
+            max-width: 400px; /* 移动端适应最大宽度 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-info h2 {
+            margin: 0;
+            font-size: 20px; /* 移动端适应字体大小 */
+            color: #333;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .contact-info .company {
+            font-weight: bold;
+            font-size: 20px; /* 修改字体大小 */
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* 为公司名称左侧增加蓝条 */
+        .contact-info .company::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background-color: #0078D4; /* 蓝色竖条 */
+            border-radius: 8px; /* 圆角 */
+        }
+
+        /* 二维码区域 */
+        .qr-code-section {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background-color: #E0E0E0; /* 二维码背景色 */
+            border-radius: 8px; /* 圆角 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #FFF;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1E1E1E;
+                color: #FFFFFF;
+            }
+
+            .header,
+            .footer {
+                background-color: #2D2D30;
+                border-color: #444;
+            }
+
+            .header h1,
+            .header .subtitle {
+                color: #FFFFFF; /* 改为白色 */
+            }
+
+            .contact-info {
+                background-color: #3C3C3F;
+            }
+
+            .contact-info p,
+            .contact-info h2 {
+                color: #D4D4D4;
+            }
+
+            .contact-info .company::before {
+                background-color: #0078D4; /* 保持蓝色竖条 */
+            }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .contact-info {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .contact-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 页眉 -->
+    <header class="header">
+        <h1>联系我们</h1>
+        <div class="subtitle">东莞市远图装饰工程有限公司</div>
+        <!-- 返回按钮，使用箭头 -->
+        <button class="back-button" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+    </header>
+
+    <!-- 大图区域 -->
+    <div class="contact-image"></div>
+
+    <!-- 联系方式信息框 -->
+    <div class="contact-info">
+        <div class="company">东莞市远图装饰工程有限公司</div>
+        <p>地址：广东省东莞市东城街道光大路18号光大花园金胡苑2栋121室</p>
+        <p>电话：15814118081</p>
+        <p>传真：</p>
+    </div>
+
+    <!-- 二维码区域 -->
+    <div class="qr-code-section">
+        <div class="qr-code">
+            <img src="https://via.placeholder.com/150" alt="二维码" style="max-width: 100%; max-height: 100%;">
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>版权所有 © 2024 东莞市远图装饰工程有限公司 | 手机版 | <a href="../../PC/Contact/index.html">PC版</a></p>
+    </footer>
+
+    <script>
+        function goBack() {
+            window.history.back();  // 返回到上一个页面
+        }
+    </script>
+
+</body>
+</html>

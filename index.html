@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备检测</title>
+    <script>
+        function detectDevice() {
+            // 获取用户代理字符串
+            var userAgent = navigator.userAgent;
+
+            // 判断是否为手机（排除iPad和大屏Android设备）
+            if (/Mobi|Android/i.test(userAgent) && !/Tablet|iPad/i.test(userAgent)) {
+                // 如果是手机，跳转到Phone/index.html
+                window.location.href = 'Phone/index.html';
+            } else {
+                // 否则，跳转到PC/index.html
+                window.location.href = 'PC/index.html';
+            }
+        }
+
+        // 当页面加载完成后调用设备检测函数
+        window.onload = detectDevice;
+    </script>
+</head>
+<body>
+    <h1>正在检测设备...</h1>
+</body>
+</html>
