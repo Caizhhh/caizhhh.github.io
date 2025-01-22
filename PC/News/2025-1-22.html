@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh - CN">
+
+<head>
+    <meta charset="UTF - 8">
+    <meta name="viewport" content="width=device - width, initial - scale = 1.0">
+    <title>新年祝福</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFE4B5;
+            position: relative;
+        }
+
+        #backButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #FF6347;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #message {
+            font-size: 48px;
+            color: #8B4513;
+            text-align: center;
+            z-index: 1;
+        }
+
+      .firework {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="backButton">← 点我返回主页</button>
+    <div id="message">东莞市远图装饰工程有限公司<br>祝大家2025新年快乐<br>新年吉祥，万事如意</div>
+    <script>
+        const fireworkImages = ['newyear/1.png', 'newyear/2.png', 'newyear/3.png', 'newyear/4.png', 'newyear/5.png'];
+        const numFireworks = 20;
+        const bodyWidth = document.body.clientWidth;
+        const bodyHeight = document.body.clientHeight;
+
+        for (let i = 0; i < numFireworks; i++) {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            const randomImageIndex = Math.floor(Math.random() * fireworkImages.length);
+            firework.style.backgroundImage = `url('${fireworkImages[randomImageIndex]}')`;
+            const randomX = Math.floor(Math.random() * bodyWidth);
+            const randomY = Math.floor(Math.random() * bodyHeight);
+            firework.style.left = randomX + 'px';
+            firework.style.top = randomY + 'px';
+            document.body.appendChild(firework);
+        }
+
+        document.getElementById('backButton').addEventListener('click', function () {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>
